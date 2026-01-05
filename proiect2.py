@@ -3,32 +3,27 @@ import math
 import matplotlib.pyplot as plt
 
 # Proiect 2 – Varianta 9
-# Sa se genereze prin doua metode variabila Beta(2, 4) (curs 6). Sa segenereze histogramele asociate celor doua metode. (curs 8).
+# Sa se genereze prin doua metode variabila Beta(2, 4). Sa segenereze histogramele asociate celor doua metode. 
 
 # -------------------------
-# Metoda 1 (curs 6): Beta din doua Gama
-# Beta(parametru_a, parametru_b): X = gama_a/(gama_a+gama_b), gama_a~Gama(0,1,parametru_a), gama_b~Gama(0,1,parametru_b)
-# Pentru parametru_a = 2 si parametru_b = 4 (intregi), Gama(0,1,k) se obtine ca suma de k exponentiale Exp(1)
+# Metoda 1: Beta din doua Gama
+# Beta(a,b): X = X1/(X1+X2), X1~Gama(0,1,a), X2~Gama(0,1,b)
+# Pentru a = 2 si b = 4 (intregi), Gama(0,1,k) se obtine ca suma de k exponentiale Exp(1)
 # Exp(1): -ln(U)
-
+# -------------------------
 
 def beta_din_gama(numar_selectii):
     esantion_beta = []
     for _ in range(numar_selectii):
-        gama_a = -math.log(random.random()) - math.log(random.random())
-        gama_b = (
-            -math.log(random.random())
-            - math.log(random.random())
-            - math.log(random.random())
-            - math.log(random.random())
-        )
+        gama_a = - math.log(random.random()) - math.log(random.random())
+        gama_b = - math.log(random.random()) - math.log(random.random()) - math.log(random.random()) - math.log(random.random())
         esantion_beta.append(gama_a / (gama_a + gama_b))
     return esantion_beta
 
 # -------------------------
-# Metoda 2 (curs 6): Statistica de ordine
-# Pentru parametru_a = 2, parametru_b = 4: n = parametru_a + parametru_b - 1 = 5
-# Generam valori_uniforme[0..4] uniforme, sortam, luam valori_uniforme[1] (U(2))
+# Metoda 2: Statistica de ordine
+# Pentru a = 2, b = 4: n = a + b - 1 = 5
+# Generam U1..U5 uniforme, sortam, luam U(2)
 # -------------------------
 
 def beta_din_statistica_ordin(numar_selectii):
@@ -40,14 +35,7 @@ def beta_din_statistica_ordin(numar_selectii):
     return esantion_beta
 
 
-# -------------------------
-# Validare (curs 8): media si dispersia de selectie
-# media = (sum valori)/n
-# dispersia = media_patratica - media^2
-# media_patratica = (sum valori^2)/n
-# -------------------------
-
-# Validare cu media si dispersia de selectie (curs 8)
+# Validare cu media si dispersia de selectie
 
 def media_si_dispersia_selectiei(valori):
     n = len(valori)
@@ -62,13 +50,10 @@ numar_selectii = 100_000
 parametru_a = 2
 parametru_b = 4
 
-# Valori teoretice (curs 6): E[X] = parametru_a/(parametru_a+parametru_b), Var[X] = parametru_a*parametru_b/((parametru_a+parametru_b)^2 (parametru_a+parametru_b+1))
+# Valori teoretice: E[X] = a/(a+b), Var[X] = ab/((a+b)^2 (a+b+1))
 
 media_teoretica = parametru_a / (parametru_a + parametru_b)
-dispersia_teoretica = (
-    parametru_a * parametru_b
-    / ((parametru_a + parametru_b) ** 2 * (parametru_a + parametru_b + 1))
-)
+dispersia_teoretica = parametru_a * parametru_b / ((parametru_a + parametru_b) ** 2 * (parametru_a + parametru_b + 1))
 
 esantion_beta_gama = beta_din_gama(numar_selectii)
 esantion_beta_ordin = beta_din_statistica_ordin(numar_selectii)
