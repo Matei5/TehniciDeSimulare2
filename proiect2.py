@@ -3,13 +3,13 @@ import math
 import matplotlib.pyplot as plt
 
 # Proiect 2 – Varianta 9
-# Sa se genereze prin doua metode variabila Beta(2, 4). Sa segenereze histogramele asociate celor doua metode. 
+# Generez prin doua metode variabila Beta(2, 4). Generez histogramele asociate celor doua metode. 
 
 # -------------------------
 # Metoda 1: Beta din doua Gama
-# Beta(a,b): X = X1/(X1+X2), X1~Gama(0,1,a), X2~Gama(0,1,b)
-# Pentru a = 2 si b = 4 (intregi), Gama(0,1,k) se obtine ca suma de k exponentiale Exp(1)
-# Exp(1): -ln(U)
+# Folosesc relatia Beta(a,b): X = X1/(X1+X2), unde X1~=Gama(0,1,a), X2~=Gama(0,1,b)
+# Pentru a = 2 si b = 4 (intregi), obtin Gama(0,1,k) ca suma de k exponentiale Exp(1)
+# Generez Exp(1) prin: -ln(U)
 # -------------------------
 
 def beta_din_gama(numar_selectii):
@@ -22,8 +22,8 @@ def beta_din_gama(numar_selectii):
 
 # -------------------------
 # Metoda 2: Statistica de ordine
-# Pentru a = 2, b = 4: n = a + b - 1 = 5
-# Generam U1..U5 uniforme, sortam, luam U(2)
+# Pentru a = 2, b = 4 am: n = a + b - 1 = 5
+# Generez U1..U5 uniforme, le sortez, iau U(2)
 # -------------------------
 
 def beta_din_statistica_ordin(numar_selectii):
